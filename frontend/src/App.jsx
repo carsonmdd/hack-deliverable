@@ -6,8 +6,12 @@ function App() {
 	const [quotes, setQuotes] = useState([]);
 	useEffect(() => {
 		async function fetchData() {
-			const response = await axios.get('/api/quote');
-			setQuotes(response.data);
+			try {
+				const response = await axios.get('/api/quote');
+				setQuotes(response.data);
+			} catch (error) {
+				console.log(error.message);
+			}
 		}
 
 		fetchData();

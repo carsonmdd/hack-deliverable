@@ -1,0 +1,41 @@
+.card {
+	border: 3px solid var(--highlight-color);
+	border-radius: 15px;
+	width: 300px;
+	height: 150px;
+	display: flex;
+	flex-direction: column;
+	padding: 8px;
+}
+
+.quote-container {
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	overflow-y: auto;
+	flex: 0 0 70%;
+	text-align: center;
+}
+
+.info-container {
+	display: flex;
+	align-items: center;
+	flex: 0 0 30%;
+	max-height: 30%;
+	padding: 0 20px;
+}
+
+.date {
+	margin-left: 20px;
+	font-size: 0.9rem;
+	color: var(--text-secondary);
+}
+
+.name {
+	font-size: 1.1rem;
+}
+
+.quote-text {
+	font-style: italic;
+	font-size: 1.2rem;
+}

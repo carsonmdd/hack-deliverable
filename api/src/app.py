@@ -49,10 +49,19 @@ def post_message(name: str = Form(), message: str = Form()) -> RedirectResponse:
 
 # TODO: add another API route with a query parameter to retrieve quotes based on max age
 @app.get("/quote")
-def get_quote(max_age: float = float('inf')):
+def get_quote(filter: str = 'week') -> list[Quote]:
     """
     Retrieve quotes from the database that are at most max_age seconds old.
     """
+
+    filter_durations = {
+        'week': 7 * 24 * 60 * 60,
+        'month': 30 * 24 * 60 * 60,
+        'year': 365 * 24 * 60 * 60,
+        'all': float('inf'),
+    }
+
+    max_age = filter_durations[filter]
 
     quotes = []
     current_time = datetime.now()

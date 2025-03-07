@@ -10,9 +10,12 @@ function App() {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const response = await axios.get('/api/quote');
+				const response = await axios.get('/api/quote', {
+					params: {
+						filter: quoteFilter,
+					},
+				});
 				setQuotes(response.data);
-				console.log(response.data);
 			} catch (error) {
 				console.log(error.message);
 			}
@@ -55,7 +58,6 @@ function App() {
 					<h2 className='prev-quotes-title'>Previous Quotes</h2>
 					<select
 						onChange={(e) => {
-							console.log(e.target.value);
 							setQuoteFilter(e.target.value);
 						}}
 					>

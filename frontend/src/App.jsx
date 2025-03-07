@@ -24,6 +24,28 @@ function App() {
 		fetchData();
 	}, [quoteFilter]);
 
+	const handleQuoteSubmit = async (e) => {
+		e.preventDefault();
+		const name = e.target.name.value;
+		const message = e.target.message.value;
+
+		const formData = new FormData();
+		formData.append('name', name);
+		formData.append('message', message);
+
+		try {
+			const response = await axios.post('/api/quote', formData);
+
+			const newQuote = response.data.quote;
+
+			setQuotes((prevQuotes) => [...prevQuotes, newQuote]);
+
+			e.target.reset();
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
 	return (
 		<div className='App'>
 			{/* TODO: include an icon for the quote book */}
@@ -35,7 +57,7 @@ function App() {
 				<div className='form-container'>
 					<h2>Submit a quote</h2>
 					{/* TODO: implement custom form submission logic to not refresh the page */}
-					<form action='/api/quote' method='post'>
+					<form onSubmit={handleQuoteSubmit}>
 						<label htmlFor='input-name'>Name</label>
 						<input
 							type='text'
